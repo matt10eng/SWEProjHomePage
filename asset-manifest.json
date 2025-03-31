@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/SWEProjHomePage/static/css/main.532fea8b.css",
-    "main.js": "/SWEProjHomePage/static/js/main.518a4ab1.js",
-    "static/js/453.920b4e65.chunk.js": "/SWEProjHomePage/static/js/453.920b4e65.chunk.js",
-    "index.html": "/SWEProjHomePage/index.html",
-    "main.532fea8b.css.map": "/SWEProjHomePage/static/css/main.532fea8b.css.map",
-    "main.518a4ab1.js.map": "/SWEProjHomePage/static/js/main.518a4ab1.js.map",
-    "453.920b4e65.chunk.js.map": "/SWEProjHomePage/static/js/453.920b4e65.chunk.js.map"
+    "main.css": "/SWEProject3/static/css/main.532fea8b.css",
+    "main.js": "/SWEProject3/static/js/main.85722dd5.js",
+    "static/js/453.920b4e65.chunk.js": "/SWEProject3/static/js/453.920b4e65.chunk.js",
+    "index.html": "/SWEProject3/index.html",
+    "main.532fea8b.css.map": "/SWEProject3/static/css/main.532fea8b.css.map",
+    "main.85722dd5.js.map": "/SWEProject3/static/js/main.85722dd5.js.map",
+    "453.920b4e65.chunk.js.map": "/SWEProject3/static/js/453.920b4e65.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.532fea8b.css",
-    "static/js/main.518a4ab1.js"
+    "static/js/main.85722dd5.js"
   ]
 }
