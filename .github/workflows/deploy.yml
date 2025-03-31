@@ -16,12 +16,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'  # Use the Node.js version your project requires
-          cache: 'npm'
+          # Removed the cache option
 
       - name: Install Dependencies 🔧
         run: |
           cd my-resume-site
-          npm ci
+          npm install
 
       - name: Build React App 🏗️
         run: |
