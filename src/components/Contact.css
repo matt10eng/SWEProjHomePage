@@ -1,0 +1,45 @@
+.contact {
+  margin: 2rem 0;
+  padding: 2rem 0;
+}
+
+.contact-content {
+  background-color: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 5px;
+  box-shadow: var(--card-shadow);
+}
+
+.contact-item {
+  margin-bottom: 1rem;
+  padding: 0.7rem;
+  border-bottom: 1px solid var(--light-border);
+}
+
+.contact-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.contact-label {
+  font-weight: bold;
+  margin-right: 0.5rem;
+  min-width: 80px;
+  display: inline-block;
+  color: var(--title-text);
+}
+
+.contact-value {
+  color: var(--text-color);
+}
+
+.contact-link {
+  color: var(--link-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-link:hover {
+  color: var(--link-hover);
+  text-decoration: underline;
+} 
