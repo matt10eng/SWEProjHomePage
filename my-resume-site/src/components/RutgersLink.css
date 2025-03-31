@@ -1,0 +1,29 @@
+.rutgers-link {
+  margin: 2rem auto;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  text-align: center;
+  max-width: 600px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.rutgers-link:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.rutgers-link a {
+  color: #CC0033;
+  text-decoration: none;
+  font-weight: bold;
+  display: block;
+  padding: 10px;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+.rutgers-link a:hover {
+  color: #FF0033;
+} 
