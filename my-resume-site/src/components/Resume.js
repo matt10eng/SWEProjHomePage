@@ -7,6 +7,19 @@ const Resume = () => {
       <div className="container">
         <h2 className="section-title">Resume</h2>
         
+        {/* Download Resume Button */}
+        <div className="resume-download">
+          <a 
+            href={`${process.env.PUBLIC_URL}/resume.pdf`} 
+            download="Matthew_Eng_Resume.pdf" 
+            className="download-button"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Download Resume PDF
+          </a>
+        </div>
+        
         {/* Education Section */}
         <div className="resume-section">
           <h3>Education</h3>
