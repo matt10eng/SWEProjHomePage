@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/SWEProjHomePage/static/css/main.20468849.css",
-    "main.js": "/SWEProjHomePage/static/js/main.eb3ce44a.js",
+    "main.js": "/SWEProjHomePage/static/js/main.f7d09622.js",
     "static/js/453.920b4e65.chunk.js": "/SWEProjHomePage/static/js/453.920b4e65.chunk.js",
     "index.html": "/SWEProjHomePage/index.html",
     "main.20468849.css.map": "/SWEProjHomePage/static/css/main.20468849.css.map",
-    "main.eb3ce44a.js.map": "/SWEProjHomePage/static/js/main.eb3ce44a.js.map",
+    "main.f7d09622.js.map": "/SWEProjHomePage/static/js/main.f7d09622.js.map",
     "453.920b4e65.chunk.js.map": "/SWEProjHomePage/static/js/453.920b4e65.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.20468849.css",
-    "static/js/main.eb3ce44a.js"
+    "static/js/main.f7d09622.js"
   ]
 }
