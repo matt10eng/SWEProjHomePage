@@ -1,0 +1,148 @@
+.calculator-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background-color: var(--bg-color);
+}
+
+.calculator-container {
+  background-color: var(--card-bg);
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: var(--card-shadow);
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.calculator-container h2 {
+  color: var(--title-text);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.calculator {
+  width: 100%;
+  background-color: #202020;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.calculator-display {
+  background-color: #7fa892;
+  color: #202020;
+  font-size: 2rem;
+  padding: 1rem;
+  text-align: right;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.calculator-keypad {
+  display: flex;
+}
+
+.input-keys {
+  width: 75%;
+}
+
+.function-keys {
+  display: flex;
+}
+
+.digit-keys {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.calculator-key {
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #4d4d4d;
+  color: white;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.calculator-key:hover {
+  background-color: #666;
+}
+
+.calculator-key:active {
+  background-color: #888;
+}
+
+.function-keys .calculator-key {
+  width: 33.33%;
+  background-color: #3d3d3d;
+}
+
+.digit-keys .calculator-key {
+  width: 33.33%;
+}
+
+.digit-keys .key-0 {
+  width: 66.66%;
+}
+
+.operator-keys {
+  width: 25%;
+}
+
+.operator-keys .calculator-key {
+  width: 100%;
+  background-color: #f5923e;
+}
+
+.operator-keys .calculator-key:hover {
+  background-color: #f7a667;
+}
+
+.operator-keys .calculator-key:active {
+  background-color: #f9ba91;
+}
+
+.back-button {
+  margin-top: 2rem;
+  padding: 0.8rem 1.5rem;
+  background-color: var(--link-color);
+  color: white;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.back-button:hover {
+  background-color: var(--link-hover);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 480px) {
+  .calculator-container {
+    padding: 1rem;
+  }
+  
+  .calculator-key {
+    height: 50px;
+    font-size: 1.2rem;
+  }
+  
+  .calculator-display {
+    font-size: 1.5rem;
+    min-height: 50px;
+  }
+} 
