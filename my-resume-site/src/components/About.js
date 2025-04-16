@@ -22,10 +22,16 @@ const About = () => {
             and continuously expanding my knowledge in software engineering and AI technologies.
           </p>
           <div className="resume-download">
-            <a href="/resume.pdf" download className="download-button">
-              Download Resume PDF
-            </a>
-          </div>
+          <a 
+            href={`${process.env.PUBLIC_URL}/resume.pdf`} 
+            download="Matthew_Eng_Resume.pdf" 
+            className="download-button"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Download Resume PDF
+          </a>
+        </div>
         </div>
       </div>
     </section>
