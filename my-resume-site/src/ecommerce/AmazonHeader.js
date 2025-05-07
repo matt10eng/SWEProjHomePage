@@ -91,11 +91,18 @@ const AmazonHeader = () => {
       clearTimeout(searchTimeout.current);
     }
     
-    // Navigate to search results page even with empty search term
-    // Empty search will show all products
-    navigate(`/ecommerce/search?query=${encodeURIComponent(searchTerm.trim())}`);
+    // Only navigate if the search term has changed or we're not already on the search page
+    const currentSearchParams = new URLSearchParams(search);
+    const currentQuery = currentSearchParams.get('query') || '';
     
-    // Hide autocomplete
+    if (currentQuery !== searchTerm.trim() || pathname !== '/ecommerce/search') {
+      // Navigate to search results page even with empty search term
+      // Empty search will show all products
+      navigate(`/ecommerce/search?query=${encodeURIComponent(searchTerm.trim())}`);
+    }
+    
+    // Hide autocomplete but don't blur the input
+    // This allows users to continue typing after submitting
     setShowAutocomplete(false);
     
     // If mobile menu is open, close it
@@ -107,11 +114,17 @@ const AmazonHeader = () => {
   // Handle clicks outside the search autocomplete
   useEffect(() => {
     const handleClickOutside = (event) => {
+      // Check if the click is outside the search area AND not on one of our search results
+      const searchAutocomplete = document.querySelector('.search-autocomplete');
+      const clickedOnResult = searchAutocomplete && searchAutocomplete.contains(event.target);
+      
       if (
         showAutocomplete &&
         searchRef.current && 
-        !searchRef.current.contains(event.target)
+        !searchRef.current.contains(event.target) &&
+        !clickedOnResult
       ) {
+        // Only close if we're not clicking on a result
         setShowAutocomplete(false);
       }
     };
@@ -191,7 +204,12 @@ const AmazonHeader = () => {
 
   // Handle result click
   const handleResultClick = () => {
+    // Just hide the autocomplete dropdown when a result is clicked
+    // The navigation will be handled by the SearchAutocomplete component
     setShowAutocomplete(false);
+    
+    // Don't blur the search input to avoid focus issues
+    // This prevents the keyboard from hiding on mobile
   };
 
   // Handle search focus
@@ -202,8 +220,14 @@ const AmazonHeader = () => {
 
   // Handle search blur - update URL if on search page and search term changed
   const handleSearchBlur = () => {
-    // Hide the autocomplete dropdown
-    setShowAutocomplete(false);
+    // Use a small delay before hiding the dropdown
+    // This allows clicks on results to register before the dropdown disappears
+    setTimeout(() => {
+      // Check if the focus is still outside the search area before hiding
+      if (!searchRef.current?.contains(document.activeElement)) {
+        setShowAutocomplete(false);
+      }
+    }, 200);
     
     // If we're on the search page and the search term has changed from the URL
     if (pathname === '/ecommerce/search') {

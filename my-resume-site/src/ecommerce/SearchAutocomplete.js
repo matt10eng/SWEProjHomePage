@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './styles/search-autocomplete.css';
 
 /**
@@ -19,6 +19,8 @@ const SearchAutocomplete = ({
   onResultClick, 
   show 
 }) => {
+  const navigate = useNavigate();
+
   // Don't show dropdown if explicitly hidden
   if (!show) {
     return null;
@@ -33,6 +35,32 @@ const SearchAutocomplete = ({
     return null;
   }
 
+  // Handle product click navigation
+  const handleProductClick = (productId, e) => {
+    e.preventDefault(); // Prevent default Link behavior
+    
+    // Call the onResultClick callback to close the dropdown
+    if (onResultClick) {
+      onResultClick();
+    }
+    
+    // Use navigate to go to the product page
+    navigate(`/ecommerce/products/${productId}`);
+  };
+  
+  // Handle "See all results" click
+  const handleSeeAllClick = (e) => {
+    e.preventDefault(); // Prevent default Link behavior
+    
+    // Call the onResultClick callback to close the dropdown
+    if (onResultClick) {
+      onResultClick();
+    }
+    
+    // Navigate to search results page
+    navigate(`/ecommerce/search?query=${encodeURIComponent(searchTerm.trim())}`);
+  };
+
   return (
     <div className="search-autocomplete">
       {loading ? (
@@ -45,9 +73,9 @@ const SearchAutocomplete = ({
           <ul className="autocomplete-results">
             {results.slice(0, 5).map(product => (
               <li key={product._id} className="autocomplete-result-item">
-                <Link 
-                  to={`/ecommerce/products/${product._id}`}
-                  onClick={() => onResultClick && onResultClick(product)}
+                <a 
+                  href={`/ecommerce/products/${product._id}`}
+                  onClick={(e) => handleProductClick(product._id, e)}
                   className="result-link"
                 >
                   <div className="result-image">
@@ -60,22 +88,22 @@ const SearchAutocomplete = ({
                     <div className="result-name">{product.name}</div>
                     <div className="result-price">${product.price.toFixed(2)}</div>
                   </div>
-                </Link>
+                </a>
               </li>
             ))}
           </ul>
           
           <div className="autocomplete-footer">
-            <Link 
-              to={`/ecommerce/search?query=${encodeURIComponent(searchTerm.trim())}`}
+            <a 
+              href={`/ecommerce/search?query=${encodeURIComponent(searchTerm.trim())}`}
               className="view-all-results"
-              onClick={() => onResultClick && onResultClick()}
+              onClick={handleSeeAllClick}
             >
               {searchTerm.trim() ? 
                 `See all results for "${searchTerm}" (${results.length})` : 
                 `See all products (${results.length})`
               }
-            </Link>
+            </a>
           </div>
         </>
       ) : showNoResults ? (
