@@ -4,7 +4,10 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --detectOpenHandles --forceExit --verbose",
-    "seed": "node seedProducts.js"
+    "seed": "node seedProducts.js",
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "setup": "cp .env.template .env"
   },
   "jest": {
     "verbose": true,
