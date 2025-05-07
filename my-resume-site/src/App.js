@@ -11,12 +11,14 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import DarkModeToggle from './components/DarkModeToggle';
 import Calculator from './components/Calculator';
+import Ecommerce from './components/Ecommerce';
 
 function App() {
   return (
-    <Router basename={process.env.PUBLIC_URL}>
+    <Router>
       <Routes>
         <Route path="/calculator" element={<Calculator />} />
+        <Route path="/ecommerce/*" element={<Ecommerce />} />
         <Route path="/" element={
           <div className="App">
             <DarkModeToggle />

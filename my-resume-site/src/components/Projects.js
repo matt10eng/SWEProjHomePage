@@ -41,6 +41,17 @@ const Projects = () => {
             </div>
           </div>
           
+          {/* E-commerce Project Card */}
+          <div className="project-card">
+            <div className="project-info">
+              <h3>E-commerce Site</h3>
+              <p>A React-powered e-commerce front-endwith product listings, cart, and checkout.</p>
+              <Link to="/ecommerce" className="view-project-btn">
+               Try E-commerce
+              </Link>
+            </div>
+          </div>
+          
           {/* Other Project Cards */}
           <div className="project-card">
             <div className="project-info">

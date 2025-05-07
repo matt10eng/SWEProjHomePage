@@ -1,0 +1,279 @@
+/* Ecommerce styles placeholder */ 
+
+/* H&M-inspired e-commerce styles */
+.ecommerce-page {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background-color: #fafafa;
+  color: #333;
+}
+
+.ecom-nav {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  background-color: #fff;
+  padding: 1rem 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.ecom-nav a {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  color: #000;
+  padding: 0.5rem;
+  transition: color 0.2s, border-bottom-color 0.2s;
+}
+
+.ecom-nav a:hover {
+  color: #555;
+}
+
+.ecom-nav a.active {
+  border-bottom: 2px solid #000;
+}
+
+.ecommerce-container {
+  max-width: none;
+  width: 100%;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.product-card {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+  border: 1px solid #eaeaea;
+}
+
+.product-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.product-image {
+  width: 100%;
+  object-fit: cover;
+}
+
+.product-name {
+  font-size: 1rem;
+  margin: 0.75rem 0 0.25rem;
+  color: #000;
+}
+
+.product-price {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.cart-page,
+.orders-list,
+.order-detail,
+.product-detail {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 4px;
+  border: 1px solid #eaeaea;
+}
+
+.cart-item,
+.order-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 1px solid #eee;
+  padding: 1rem 0;
+}
+
+.cart-item:last-child,
+.order-card:last-child {
+  border-bottom: none;
+}
+
+.cart-item-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+}
+
+.cart-item-info {
+  flex: 1;
+}
+
+.cart-item-actions input {
+  width: 60px;
+  margin-right: 1rem;
+}
+
+.checkout-button,
+.back-button {
+  display: inline-block;
+  background-color: #000;
+  color: #fff;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 1.5rem;
+}
+
+.checkout-button:hover,
+.back-button:hover {
+  background-color: #333;
+}
+
+.order-detail ul {
+  list-style: none;
+  padding: 0;
+}
+
+.order-detail li {
+  margin-bottom: 0.5rem;
+}
+
+/* Amazon-like header styles */
+.amazon-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background-color: #131921;
+  padding: 0.5rem 1rem;
+}
+
+.amazon-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ff9900;
+  text-transform: lowercase;
+  margin-right: 1rem;
+}
+
+.amazon-search {
+  flex: 1;
+  display: flex;
+  max-width: 600px;
+  margin: 0 1rem;
+}
+
+.amazon-search input {
+  flex: 1;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 4px 0 0 4px;
+}
+
+.amazon-search button {
+  padding: 0 1rem;
+  background-color: #febd69;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+}
+
+.amazon-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.amazon-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-left: 0;
+}
+
+.link-item {
+  color: #fff;
+  font-size: 1rem;
+  padding: 0.5rem 0.75rem;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.link-item:hover {
+  text-decoration: underline;
+}
+
+.cart-item-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.action-link {
+  background: none;
+  border: none;
+  color: #0073bb;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: 0.9rem;
+}
+
+.action-link:hover {
+  color: #e47911;
+  text-decoration: underline;
+}
+
+.product-detail .product-image-large {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 1rem;
+}
+
+/* Style the add-cart wrapper for product detail feedback */
+.product-detail .add-cart {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.product-detail .added-to-cart {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background-color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  color: rgb(6, 125, 98);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.product-detail .added-to-cart-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.product-detail .added-to-cart img {
+  height: 20px;
+  margin-right: 5px;
+} 
