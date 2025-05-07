@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import '../ecommerce/Ecommerce.css';
 import AmazonHeader from '../ecommerce/AmazonHeader';
 import { AuthProvider } from '../ecommerce/AuthContext';
@@ -18,6 +18,13 @@ import TrackingPage from '../ecommerce/TrackingPage';
 import ThankYouPage from '../ecommerce/ThankYouPage';
 
 const Ecommerce = () => {
+    // Determine if we're on Vercel or GitHub Pages
+    const { pathname } = useLocation();
+    // This is a simple way to detect if we're on the homepage route
+    // In a Vercel deployment, the path would just be "/ecommerce"
+    // On GitHub Pages with your config, it would be "/SWEProjHomePage/ecommerce"
+    const isOnRootRoute = pathname === '/ecommerce' || pathname === '/SWEProjHomePage/ecommerce' || pathname === '/';
+    
     return (
         <AuthProvider>
             <CartProvider>

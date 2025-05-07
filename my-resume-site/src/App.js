@@ -14,8 +14,14 @@ import Calculator from './components/Calculator';
 import Ecommerce from './components/Ecommerce';
 
 function App() {
+  // Determine the basename based on the environment
+  // For GitHub Pages, we need '/SWEProjHomePage'
+  // For Vercel, we need '/'
+  const isVercel = window.location.hostname.includes('vercel.app');
+  const basename = isVercel ? '/' : '/SWEProjHomePage';
+
   return (
-    <Router>
+    <Router basename={basename}>
       <Routes>
         <Route path="/calculator" element={<Calculator />} />
         <Route path="/ecommerce/*" element={<Ecommerce />} />
