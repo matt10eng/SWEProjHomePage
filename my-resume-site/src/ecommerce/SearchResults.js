@@ -63,7 +63,15 @@ const SearchResults = () => {
   // Use searchResults from context
   const [products, setProducts] = useState([]);
   
+  // Track if we've already attempted to fetch results for the current query
+  const hasAttemptedFetch = useRef(false);
+  
   useEffect(() => {
+    // Reset the fetch attempt flag when query changes
+    if (queryParam !== prevQueryParam.current) {
+      hasAttemptedFetch.current = false;
+    }
+    
     setLoading(true);
     // If we have a search term, use the search results
     if (searchTerm.trim() && searchResults.length > 0) {
@@ -75,9 +83,13 @@ const SearchResults = () => {
       setProducts(allProducts);
       setLoading(false);
     }
-    // Otherwise, fetch the data
-    else {
+    // Only fetch if we haven't already attempted for this query
+    else if (!hasAttemptedFetch.current) {
+      hasAttemptedFetch.current = true;
       fetchSearchResults(queryParam);
+    } else {
+      // We've already tried to fetch with no results
+      setLoading(false);
     }
   }, [searchTerm, searchResults, allProducts, queryParam]);
   
@@ -95,6 +107,8 @@ const SearchResults = () => {
       }
       
       const productData = response.data;
+      
+      // Update local products state
       setProducts(productData);
       
       // Store in context for other components
@@ -102,11 +116,12 @@ const SearchResults = () => {
         // If this was a request for all products, also update allProducts
         setAllProducts(productData);
       } else {
-        // If it was a search query, update searchResults
+        // If it was a search query, update searchResults - even if empty
+        // This prevents repeated attempts to fetch the same empty results
         setSearchResults(productData);
       }
       
-      // Initialize quantities for all products if they don't already exist
+      // Only initialize quantities if we have products
       if (productData.length > 0) {
         setQuantities(prevQuantities => {
           const newQuantities = { ...prevQuantities };
@@ -121,6 +136,8 @@ const SearchResults = () => {
     } catch (err) {
       console.error('Error fetching search results:', err);
       setError(err.message);
+      // Set empty results to prevent refetching on error
+      setSearchResults([]);
     } finally {
       setLoading(false);
       setIsSearching(false);

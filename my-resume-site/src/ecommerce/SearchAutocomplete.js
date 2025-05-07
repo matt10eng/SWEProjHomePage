@@ -19,8 +19,17 @@ const SearchAutocomplete = ({
   onResultClick, 
   show 
 }) => {
-  // Only hide the dropdown if show is false or there are no results
-  if (!show || (!loading && results.length === 0)) {
+  // Don't show dropdown if explicitly hidden
+  if (!show) {
+    return null;
+  }
+
+  // Check if we have a valid search term and should display no results message
+  const hasSearchTerm = searchTerm && searchTerm.trim().length > 0;
+  const showNoResults = hasSearchTerm && !loading && results.length === 0;
+  
+  // If no search term and no results and not loading, don't show dropdown
+  if (!hasSearchTerm && results.length === 0 && !loading) {
     return null;
   }
 
@@ -69,7 +78,7 @@ const SearchAutocomplete = ({
             </Link>
           </div>
         </>
-      ) : searchTerm.trim() ? (
+      ) : showNoResults ? (
         <div className="no-results">
           <p>No products found for "{searchTerm}"</p>
           <p className="no-results-suggestion">Try a different search term</p>

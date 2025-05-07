@@ -153,19 +153,32 @@ const AmazonHeader = () => {
         setSearchResults(filtered);
         setIsSearching(false);
       } 
-      // Otherwise, fetch from API
+      // Otherwise, fetch from API - only do this once per search term
       else {
-        api.get(`/api/products/search?query=${encodeURIComponent(searchTerm.trim())}`)
-          .then(res => {
-            setSearchResults(res.data);
-          })
-          .catch(error => {
-            console.error('Search error:', error);
-            setSearchResults([]);
-          })
-          .finally(() => {
-            setIsSearching(false);
-          });
+        // Use a stable key for this search to avoid duplicate requests
+        const searchKey = searchTerm.trim().toLowerCase();
+        const lastSearchKey = searchRef.current?.dataset?.lastSearchKey;
+        
+        if (searchKey !== lastSearchKey) {
+          if (searchRef.current) {
+            searchRef.current.dataset.lastSearchKey = searchKey;
+          }
+          
+          api.get(`/api/products/search?query=${encodeURIComponent(searchTerm.trim())}`)
+            .then(res => {
+              setSearchResults(res.data);
+            })
+            .catch(error => {
+              console.error('Search error:', error);
+              setSearchResults([]);
+            })
+            .finally(() => {
+              setIsSearching(false);
+            });
+        } else {
+          // We've already searched for this term, just stop loading
+          setIsSearching(false);
+        }
       }
     }, 300); // 300ms debounce - faster for a better user experience
     
