@@ -3,8 +3,11 @@
 const express = require('express');
 const Product = require('../models/product');
 const router = express.Router();
-const { getAllProducts, getProductById, updateProduct, deleteProduct } = require('../controllers/productController');
+const { getAllProducts, getProductById, updateProduct, deleteProduct, searchProducts } = require('../controllers/productController');
 const authMiddleware = require('../middleware/auth');
+
+// GET /api/products/search
+router.get('/search', searchProducts);
 
 // GET /api/products
 router.get('/', getAllProducts);
@@ -30,7 +33,7 @@ router.post('/', authMiddleware, async (req, res) => {
 // PUT /api/products/:id - update a product (admin only)
 router.put('/:id', authMiddleware, updateProduct);
 
-// DELETE /api/products/:id - remove a product (admin only)
+// DELETE /api/products/:id - delete a product (admin only)
 router.delete('/:id', authMiddleware, deleteProduct);
 
 module.exports = router;

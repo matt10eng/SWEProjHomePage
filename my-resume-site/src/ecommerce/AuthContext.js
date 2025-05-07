@@ -23,9 +23,24 @@ export const AuthProvider = ({ children }) => {
         const newToken = res.data.token;
         setToken(newToken);
         localStorage.setItem('accessToken', newToken);
+        
+        // Set user data from refresh token response
+        if (res.data.user) {
+          setUser(res.data.user);
+        }
+        // If no user data in response, fall back to fetching it
+        else {
+          return api.get('/api/users/me');
+        }
+      })
+      .then(res => {
+        if (res && res.data) {
+          setUser(res.data);
+        }
       })
       .catch(() => {
         setToken(null);
+        setUser(null);
         localStorage.removeItem('accessToken');
       })
       .finally(() => setLoading(false));

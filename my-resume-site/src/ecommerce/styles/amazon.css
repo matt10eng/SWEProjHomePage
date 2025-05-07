@@ -126,21 +126,18 @@
 }
 
 .add-to-cart-button {
-  background-color: #fcd200;
-  color: #111;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 50px;
-  font-size: 0.95rem;
-  font-weight: 600;
+  background-color: #FFD814;
+  border: 1px solid #FCD200;
+  border-radius: 20px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  padding: 8px 12px;
+  font-size: 14px;
   width: 100%;
-  margin: 0;
+  margin-top: 5px;
 }
 
 .add-to-cart-button:hover {
-  background-color: #eac100;
+  background-color: #F7CA00;
 }
 
 /* Feedback badge under Add to Cart in product list */
@@ -161,4 +158,63 @@
 .product-actions .added-to-cart img {
   height: 16px;
   margin-right: 4px;
+}
+
+/* Search Results Styles */
+.search-results-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  margin-top: 70px;
+  padding: 0 20px;
+}
+
+.search-results-header {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.search-results-header h1 {
+  font-size: 24px;
+  color: #000;
+  margin-bottom: 5px;
+}
+
+.search-results-header p {
+  color: #565959;
+  font-size: 14px;
+}
+
+.search-results-grid {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.loading,
+.error {
+  text-align: center;
+  padding: 40px;
+  font-size: 18px;
+  color: #565959;
+}
+
+.error {
+  color: #c40000;
+}
+
+@media (max-width: 768px) {
+  .search-results-container {
+    padding: 0 10px;
+  }
+  
+  .search-results-header h1 {
+    font-size: 20px;
+  }
+  
+  .search-results-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 10px;
+  }
 } 

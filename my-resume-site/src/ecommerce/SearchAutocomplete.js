@@ -1,0 +1,82 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import './styles/search-autocomplete.css';
+
+/**
+ * SearchAutocomplete component displays search suggestions as the user types
+ * 
+ * @param {Object} props
+ * @param {Array} props.results - Search results to display
+ * @param {boolean} props.loading - Whether search is in progress
+ * @param {string} props.searchTerm - Current search term
+ * @param {Function} props.onResultClick - Function to call when a result is clicked
+ * @param {boolean} props.show - Whether to show the autocomplete dropdown
+ */
+const SearchAutocomplete = ({ 
+  results, 
+  loading, 
+  searchTerm, 
+  onResultClick, 
+  show 
+}) => {
+  // Only hide the dropdown if show is false or there are no results
+  if (!show || (!loading && results.length === 0)) {
+    return null;
+  }
+
+  return (
+    <div className="search-autocomplete">
+      {loading ? (
+        <div className="autocomplete-loading">
+          <div className="loading-spinner"></div>
+          <span>Searching...</span>
+        </div>
+      ) : results.length > 0 ? (
+        <>
+          <ul className="autocomplete-results">
+            {results.slice(0, 5).map(product => (
+              <li key={product._id} className="autocomplete-result-item">
+                <Link 
+                  to={`/ecommerce/products/${product._id}`}
+                  onClick={() => onResultClick && onResultClick(product)}
+                  className="result-link"
+                >
+                  <div className="result-image">
+                    <img 
+                      src={`${process.env.PUBLIC_URL}/${product.imageUrl}`} 
+                      alt={product.name} 
+                    />
+                  </div>
+                  <div className="result-info">
+                    <div className="result-name">{product.name}</div>
+                    <div className="result-price">${product.price.toFixed(2)}</div>
+                  </div>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          
+          <div className="autocomplete-footer">
+            <Link 
+              to={`/ecommerce/search?query=${encodeURIComponent(searchTerm.trim())}`}
+              className="view-all-results"
+              onClick={() => onResultClick && onResultClick()}
+            >
+              {searchTerm.trim() ? 
+                `See all results for "${searchTerm}" (${results.length})` : 
+                `See all products (${results.length})`
+              }
+            </Link>
+          </div>
+        </>
+      ) : searchTerm.trim() ? (
+        <div className="no-results">
+          <p>No products found for "{searchTerm}"</p>
+          <p className="no-results-suggestion">Try a different search term</p>
+        </div>
+      ) : null}
+    </div>
+  );
+};
+
+export default SearchAutocomplete; 

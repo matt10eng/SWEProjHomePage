@@ -1,0 +1,157 @@
+.search-autocomplete {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.autocomplete-results {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.autocomplete-result-item {
+  display: flex;
+  padding: 10px 15px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.autocomplete-result-item:hover {
+  background-color: #f7f7f7;
+}
+
+.autocomplete-result-item:last-child {
+  border-bottom: none;
+}
+
+.result-image {
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.result-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.result-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.result-name {
+  font-size: 14px;
+  color: #111;
+  margin-bottom: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 300px;
+}
+
+.result-price {
+  font-size: 16px;
+  font-weight: 700;
+  color: #B12704;
+}
+
+.result-link {
+  display: flex;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.autocomplete-footer {
+  padding: 10px 15px;
+  border-top: 1px solid #eee;
+  background-color: #f8f8f8;
+}
+
+.view-all-results {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 14px;
+  color: #007185;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+}
+
+.view-all-results:hover {
+  text-decoration: underline;
+  color: #c45500;
+}
+
+.autocomplete-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  color: #565959;
+}
+
+.loading-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #ccc;
+  border-top: 2px solid #007185;
+  border-radius: 50%;
+  margin-right: 10px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.no-results {
+  padding: 15px;
+  text-align: center;
+}
+
+.no-results p {
+  margin: 0;
+  color: #565959;
+}
+
+.no-results-suggestion {
+  font-size: 12px;
+  margin-top: 5px !important;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .search-autocomplete {
+    max-height: 400px;
+  }
+  
+  .result-name {
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 576px) {
+  .result-name {
+    max-width: 150px;
+  }
+} 

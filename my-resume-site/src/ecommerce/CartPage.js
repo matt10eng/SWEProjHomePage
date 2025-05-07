@@ -83,7 +83,7 @@ const CartPage = () => {
   if (error) return <div>Error: {error}</div>;
   if (!items.length) return (
     <div className="cart-page">
-      <h2>Your Cart</h2>
+      <h2>Shopping Cart</h2>
       <div>Your cart is empty. <Link to="/ecommerce">Shop now</Link></div>
     </div>
   );

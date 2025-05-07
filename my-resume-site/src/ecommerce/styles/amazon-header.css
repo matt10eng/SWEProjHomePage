@@ -3,28 +3,91 @@
   color: white;
   padding-left: 15px;
   padding-right: 15px;
-
   display: flex;
   align-items: center;
-  justify-content: space-between;
-
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   height: 60px;
-
   z-index: 1000;
 }
 
-.amazon-header-left-section {
-  width: 180px;
+.mobile-menu-button {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  margin-right: 8px;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+  border-radius: 3px;
 }
 
-@media (max-width: 800px) {
-  .amazon-header-left-section {
-    width: unset;
-  }
+.mobile-menu-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.mobile-menu-button.menu-open {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.amazon-header-left-section {
+  display: flex;
+  align-items: center;
+  min-width: 100px;
+  margin-right: 10px;
+}
+
+.location-link {
+  display: flex;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  margin-left: 5px;
+}
+
+.location-icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 3px;
+  filter: invert(1);
+}
+
+.location-text {
+  display: flex;
+  flex-direction: column;
+  max-width: 120px;
+}
+
+.deliver-to-text {
+  font-size: 12px;
+  color: #ccc;
+  white-space: nowrap;
+}
+
+.location-name {
+  font-size: 14px;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.mobile-location-container {
+  display: none;
+  width: 100%;
+  padding: 10px 0;
+  border-bottom: 1px solid #333;
+}
+
+.mobile-location-container .location-text {
+  max-width: 200px; /* Slightly larger for mobile view */
 }
 
 .header-link {
@@ -50,24 +113,18 @@
   display: none;
 }
 
-@media (max-width: 575px) {
-  .amazon-logo {
-    display: none;
-  }
-
-  .amazon-mobile-logo {
-    display: block;
-    height: 35px;
-    margin-top: 5px;
-  }
-}
-
 .amazon-header-middle-section {
   flex: 1;
   max-width: 1200px;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin: 0 10px;
   display: flex;
+  position: relative;
+}
+
+.search-form {
+  display: flex;
+  width: 100%;
+  position: relative;
 }
 
 .search-bar {
@@ -100,19 +157,23 @@
 }
 
 .amazon-header-right-section {
-  width: 180px;
-  flex-shrink: 0;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.5rem;
+}
+
+.nav-section {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .orders-link {
   color: white;
   display: inline-flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   padding: 4px 6px;
   white-space: nowrap;
 }
@@ -135,8 +196,15 @@
   position: relative;
 }
 
+.cart-icon-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .cart-icon {
-  width: 50px;
+  width: 40px;
 }
 
 .cart-text {
@@ -149,11 +217,239 @@
   color: rgb(240, 136, 4);
   font-size: 16px;
   font-weight: 700;
-
   position: absolute;
-  top: 0px;
-  left: 22px;
-  
+  top: -5px;
+  left: 11px;
   width: 26px;
   text-align: center;
+}
+
+/* Responsive styles for different screen sizes */
+@media (max-width: 992px) {
+  .amazon-header-right-section {
+    gap: 0.25rem;
+  }
+  
+  .orders-link {
+    padding: 4px 4px;
+  }
+  
+  .returns-text, .orders-text {
+    font-size: 95%;
+  }
+  
+  .cart-icon {
+    width: 35px;
+  }
+  
+  .cart-text {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-button {
+    display: block;
+  }
+
+  .amazon-header {
+    justify-content: space-between;
+    padding: 0 10px;
+  }
+  
+  .amazon-header-right-section {
+    position: fixed;
+    top: 60px;
+    left: -100%;
+    width: 250px;
+    height: 100vh;
+    background-color: rgb(19, 25, 33);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px 0;
+    transition: left 0.3s ease;
+    z-index: 1001;
+    overflow-y: auto;
+    gap: 1rem;
+  }
+  
+  .amazon-header-right-section.mobile-menu-open {
+    left: 0;
+  }
+  
+  .mobile-location-container {
+    display: block;
+  }
+  
+  .orders-link {
+    width: 100%;
+    padding: 10px 20px;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid #333;
+  }
+  
+  .orders-link:hover {
+    border: none;
+    background-color: #252e39;
+    border-bottom: 1px solid #333;
+  }
+  
+  /* Improved mobile cart styling */
+  .amazon-header-right-section .cart-link {
+    width: 100%;
+    padding: 10px 20px;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid #333;
+    justify-content: flex-start;
+    display: flex;
+    align-items: center;
+  }
+  
+  .amazon-header-right-section .cart-link:hover {
+    border: none;
+    background-color: #252e39;
+    border-bottom: 1px solid #333;
+  }
+  
+  .amazon-header-right-section .cart-icon-container {
+    position: relative;
+    display: inline-flex;
+    margin-right: 10px;
+  }
+  
+  .amazon-header-right-section .cart-icon {
+    width: 30px;
+    height: auto;
+  }
+  
+  .amazon-header-right-section .cart-text {
+    margin-top: 0;
+    margin-left: 10px;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 700;
+  }
+  
+  .amazon-header-right-section .cart-quantity {
+    position: absolute;
+    top: -5px;
+    left: 14px;
+    font-size: 14px;
+  }
+  
+  /* When menu is closed, keep original cart styling for desktop view */
+  .amazon-header-right-section:not(.mobile-menu-open) .cart-link {
+    justify-content: center;
+    width: auto;
+    padding: 4px 6px;
+    border: 1px solid rgba(0, 0, 0, 0);
+  }
+  
+  .amazon-header-right-section:not(.mobile-menu-open) .cart-link:hover {
+    border: 1px solid white;
+    background-color: transparent;
+  }
+  
+  .nav-section {
+    width: 100%;
+    flex-direction: column;
+    gap: 0;
+  }
+  
+  /* Makes the cart stand out in mobile view */
+  .amazon-header-right-section .cart-link {
+    margin-top: 10px;
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+  
+  .amazon-header-right-section .cart-link:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+
+  .amazon-header-right-section .location-name {
+    max-width: 180px; /* Allow more space in the side menu */
+  }
+}
+
+@media (max-width: 576px) {
+  .amazon-logo {
+    display: none;
+  }
+
+  .amazon-mobile-logo {
+    display: block;
+    height: 35px;
+    margin-top: 5px;
+  }
+  
+  .amazon-header-middle-section {
+    margin: 0 5px;
+  }
+
+  .search-bar {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 400px) {
+  .search-bar {
+    max-width: 180px;
+  }
+  
+  .search-button {
+    width: 35px;
+  }
+  
+  .search-icon {
+    height: 18px;
+  }
+}
+
+/* Screen reader only text */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.mobile-search-container {
+  width: 100%;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #333;
+}
+
+.mobile-search-form {
+  display: flex;
+  width: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.mobile-search-bar {
+  flex: 1;
+  padding: 8px 12px;
+  border: none;
+  font-size: 14px;
+}
+
+.mobile-search-button {
+  background-color: rgb(254, 189, 105);
+  border: none;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-search-button .search-icon {
+  height: 20px;
 } 

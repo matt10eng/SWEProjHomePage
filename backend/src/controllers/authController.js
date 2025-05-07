@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const cookieOptions = {
   httpOnly: true,
   secure: process.env.NODE_ENV === 'production',
-  sameSite: 'strict',
+  sameSite: 'lax',
   maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
 };
 
@@ -80,9 +80,20 @@ exports.refreshToken = async (req, res) => {
     }
     // Verify refresh token
     const payload = jwt.verify(refreshToken, process.env.JWT_SECRET);
+    
+    // Find the user
+    const user = await User.findById(payload.id).select('-password');
+    if (!user) {
+      return res.status(401).json({ message: 'User not found' });
+    }
+    
     // Issue new access token
     const newToken = jwt.sign({ id: payload.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-    return res.json({ token: newToken });
+    
+    return res.json({ 
+      token: newToken,
+      user: { id: user._id, email: user.email, username: user.username }
+    });
   } catch (err) {
     console.error('Error refreshing token:', err);
     return res.status(401).json({ message: 'Invalid or expired refresh token' });

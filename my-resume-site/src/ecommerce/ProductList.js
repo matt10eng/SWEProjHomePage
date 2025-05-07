@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useContext } from 'react';
 import api from './api';
 import { Link } from 'react-router-dom';
 import './Ecommerce.css';
@@ -19,6 +19,16 @@ import rating45 from './images/ratings/rating-45.png';
 import rating50 from './images/ratings/rating-50.png';
 import checkmarkIcon from './images/icons/checkmark.png';
 
+// Create a context for sharing search state with the ProductList
+export const SearchContext = React.createContext({
+  searchResults: [],
+  allProducts: [],
+  searchTerm: ''
+});
+
+// Custom hook to use the search context
+export const useSearch = () => useContext(SearchContext);
+
 const ProductList = () => {
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
@@ -29,6 +39,9 @@ const ProductList = () => {
   const [quantities, setQuantities] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  
+  // Use the search context
+  const { searchResults, allProducts, searchTerm } = useSearch();
 
   useEffect(() => {
     api.get('/api/products')
@@ -42,6 +55,28 @@ const ProductList = () => {
       .catch(err => setError(err.message))
       .finally(() => setLoading(false));
   }, []);
+  
+  // Update the displayed products based on search results
+  useEffect(() => {
+    // If we have search results and a search term, show the filtered results
+    if (searchResults.length > 0 && searchTerm.trim()) {
+      setProducts(searchResults);
+      
+      // Add quantities for any new products in search results
+      const newQuantities = { ...quantities };
+      searchResults.forEach(p => {
+        if (!newQuantities[p._id]) {
+          newQuantities[p._id] = 1;
+        }
+      });
+      setQuantities(newQuantities);
+    } 
+    // If allProducts is populated and there's no search term, show all products
+    else if (allProducts.length > 0 && !searchTerm.trim()) {
+      setProducts(allProducts);
+    }
+    // Otherwise, we keep displaying what we loaded initially
+  }, [searchResults, allProducts, searchTerm]);
 
   const handleQuantityChange = (id, value) => {
     setQuantities(q => ({ ...q, [id]: Number(value) }));
