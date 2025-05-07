@@ -5,5 +5,16 @@
     { "src": "/manifest.json", "dest": "/manifest.json" },
     { "src": "/logo192.png", "dest": "/logo192.png" },
     { "src": "/(.*)", "dest": "/index.html" }
+  ],
+  "env": {
+    "PUBLIC_URL": ""
+  },
+  "build": {
+    "env": {
+      "PUBLIC_URL": ""
+    }
+  },
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 } 

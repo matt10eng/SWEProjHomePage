@@ -14,14 +14,13 @@ import Calculator from './components/Calculator';
 import Ecommerce from './components/Ecommerce';
 
 function App() {
-  // Determine the basename based on the environment
-  // For GitHub Pages, we need '/SWEProjHomePage'
-  // For Vercel, we need '/'
-  const isVercel = window.location.hostname.includes('vercel.app');
-  const basename = isVercel ? '/' : '/SWEProjHomePage';
-
+  // The homepage setting in package.json now controls the basename
+  // For GitHub Pages, the deploy script sets it to https://matt10eng.github.io/SWEProjHomePage
+  // For Vercel, it's set to "."
+  // This ensures all assets load from the correct paths
+  
   return (
-    <Router basename={basename}>
+    <Router>
       <Routes>
         <Route path="/calculator" element={<Calculator />} />
         <Route path="/ecommerce/*" element={<Ecommerce />} />
