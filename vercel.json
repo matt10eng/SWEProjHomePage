@@ -1,8 +1,4 @@
 {
-  "version": 2,
-  "buildCommand": "cd my-resume-site && npm install && npm run build",
-  "outputDirectory": "my-resume-site/build",
-  "framework": "create-react-app",
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ],
